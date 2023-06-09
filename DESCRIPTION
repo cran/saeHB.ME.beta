@@ -1,6 +1,6 @@
 Package: saeHB.ME.beta
 Title: SAE with Measurement Error using HB under Beta Distribution
-Version: 0.1.0
+Version: 1.0.1
 Authors@R: 
     c(person("Azka Ubaidillah", role = "aut", email = "azka@stis.ac.id"),
       person("Ratih Rodliyah", role = c("aut","cre"), email = "ratihrodliyah2@gmail.com"))
@@ -20,6 +20,6 @@ Author: Azka Ubaidillah [aut],
   Ratih Rodliyah [aut, cre]
 Maintainer: Ratih Rodliyah <ratihrodliyah2@gmail.com>
 VignetteBuilder: R.rsp, knitr
-Packaged: 2023-03-09 14:50:55 UTC; User
+Packaged: 2023-06-09 07:35:23 UTC; User
 Repository: CRAN
-Date/Publication: 2023-03-10 07:50:02 UTC
+Date/Publication: 2023-06-09 08:00:02 UTC
