@@ -30,7 +30,7 @@ meHBbeta(
 
 \item{iter.mcmc}{number of total iterations per chain with default \code{10000}.}
 
-\item{thin}{thinning rate, must be a positive integer with default \code{3}.}
+\item{thin}{thinning rate, must be a positive integer with default \code{2}.}
 
 \item{tau.u}{prior initial value of inverse of Variance of area random effect with default \code{1}.}
 

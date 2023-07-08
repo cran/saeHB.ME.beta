@@ -6,7 +6,7 @@
 #' @param var.coef a vector contains prior initial value of variance of Coefficient of Regression Model with default vector of \code{1} with the length of the number of regression coefficients.
 #' @param iter.update number of updates with default \code{3}.
 #' @param iter.mcmc number of total iterations per chain with default \code{10000}.
-#' @param thin thinning rate, must be a positive integer with default \code{3}.
+#' @param thin thinning rate, must be a positive integer with default \code{2}.
 #' @param tau.u  prior initial value of inverse of Variance of area random effect with default \code{1}.
 #' @param burn.in burn.in number of iterations to discard at the beginning with default \code{2000}.
 #' @param data the data frame.
@@ -232,7 +232,13 @@ meHBbeta <- function(formula, var.x, coef, var.coef,
       idx.b.varnames <- as.character(i-1)
       b.varnames[i] <-str_replace_all(paste("b[",idx.b.varnames,"]"),pattern=" ", replacement="")
     }
-
+    geweke.diag = geweke.diag(samps1)
+    geweke.diag =matrix(unlist(geweke.diag),  nrow = 1)
+    geweke.diag.param= geweke.diag[,c(2:(p+1))]
+    zscore = as.matrix(geweke.diag.param,nrow = 1)
+    rownames(zscore) = b.varnames
+    colnames(zscore) = c("Z-score")
+    zscore= t(zscore)
     result_mcmc <- samps1[,c(2:(p+1))]
     colnames(result_mcmc[[1]]) <- b.varnames
 
@@ -448,6 +454,13 @@ meHBbeta <- function(formula, var.x, coef, var.coef,
       idx.b.varnames <- as.character(i-1)
       b.varnames[i] <-str_replace_all(paste("b[",idx.b.varnames,"]"),pattern=" ", replacement="")
     }
+    geweke.diag = geweke.diag(samps1)
+    geweke.diag =matrix(unlist(geweke.diag),  nrow = 1)
+    geweke.diag.param= geweke.diag[,c(2:(p+1))]
+    zscore = as.matrix(geweke.diag.param,nrow = 1)
+    rownames(zscore) = b.varnames
+    colnames(zscore) = c("Z-score")
+    zscore= t(zscore)
 
     result_mcmc <- samps1[,c(2:(p+1))]
     colnames(result_mcmc[[1]]) <- b.varnames
@@ -481,6 +494,7 @@ meHBbeta <- function(formula, var.x, coef, var.coef,
   result$Est = cbind(Estimation, q_Estimation)
   result$refvar      = a.var
   result$coefficient = beta
+  result$geweke.diag = zscore
   result$plot       = list(graphics.off(),
                            par(mar=c(2,2,2,2)),
                            autocorr.plot(result_mcmc,col="brown2",lwd=2),
